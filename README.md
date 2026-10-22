@@ -1,2 +1,2 @@
-# projekt-semestralny
-Polygonowy projekt semestralny
+# Projekt Semestralny
+Polygonowy projekt semestralny. Pozdro 500
