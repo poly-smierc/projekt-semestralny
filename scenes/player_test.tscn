@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://c8so75hbxgm5e"]
+
+[ext_resource type="Texture2D" uid="uid://cvupagfhcp4" path="res://icon.svg" id="1_fdpfy"]
+[ext_resource type="Script" uid="uid://ddhswvkxdsks5" path="res://scripts/player_controller.gd" id="2_6p80c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75q7c"]
+size = Vector2(500, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gte3l"]
+size = Vector2(40, 40)
+
+[node name="Node2D" type="Node2D" unique_id=1347060040]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1710119076]
+position = Vector2(-42, 54)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1857016775]
+shape = SubResource("RectangleShape2D_75q7c")
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D" unique_id=1786254023]
+position = Vector2(-9.596348e-06, 0.9999981)
+scale = Vector2(3.9062498, 0.34374997)
+texture = ExtResource("1_fdpfy")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=561903808]
+position = Vector2(582, 51)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=545666235]
+shape = SubResource("RectangleShape2D_75q7c")
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D2" unique_id=1906996432]
+position = Vector2(-9.596348e-06, 0.9999981)
+scale = Vector2(3.9062498, 0.34374997)
+texture = ExtResource("1_fdpfy")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1605071827 node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer")]
+position = Vector2(0, -51)
+script = ExtResource("2_6p80c")
+coyote_timer = NodePath("CoyoteTime")
+jump_buffer_timer = NodePath("JumpBuffer")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=489230892]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_fdpfy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1504968679]
+shape = SubResource("RectangleShape2D_gte3l")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=2124956249]
+position = Vector2(0, -60)
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+
+[node name="CoyoteTime" type="Timer" parent="CharacterBody2D" unique_id=551208033]
+wait_time = 0.15
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="CharacterBody2D" unique_id=1242922497]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="CharacterBody2D/CoyoteTime" to="CharacterBody2D" method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="CharacterBody2D/JumpBuffer" to="CharacterBody2D" method="_on_jump_buffer_timer_timeout"]
