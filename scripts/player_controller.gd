@@ -3,9 +3,10 @@ class_name PlayerController
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -210.0
-const GRAVITY = 400.0
+const JUMP_GRAVITY = 400.0
+const FALL_GRAVITY = 510.0
 const ACCELERATION = 900.0
-const JUMP_HEIGHT_THRESHOLD = -80.0
+const JUMP_HEIGHT_THRESHOLD = -70.0
 
 # These must be oneshot timers
 @export var coyote_timer : Timer
@@ -48,8 +49,14 @@ func _cut_jump():
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	# If we jump, gravity has lower impact on us
+	# This gives us a nice jump curve
 	if not is_on_floor():
-		velocity.y += GRAVITY * delta
+		if velocity.y>0:
+			velocity.y += JUMP_GRAVITY * delta
+		else:
+			velocity.y += FALL_GRAVITY * delta
+			
 		if not coyote_time_used and coyote_timer.is_stopped():
 			coyote_timer.start()
 	else:
