@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://cf6lopyfc76h0"]
+
+[ext_resource type="Script" uid="uid://c4pknp51mq4ki" path="res://scripts/main.gd" id="1_o5qli"]
+
+[node name="Main" type="Control" unique_id=1243399816]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o5qli")
+
+[node name="Menu" type="Panel" parent="." unique_id=61308952]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectLevelButton" type="Button" parent="Menu" unique_id=1367424034]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -105.5
+offset_top = -348.0
+offset_right = 105.5
+offset_bottom = -290.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "Select Level"
+
+[node name="QuitButton" type="Button" parent="Menu" unique_id=977605890]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -105.5
+offset_top = -248.0
+offset_right = 105.5
+offset_bottom = -190.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "Quit
+"
+
+[node name="LevelSelect" type="Panel" parent="." unique_id=903579230]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="Button" parent="LevelSelect" unique_id=2069940558]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -27.5
+offset_top = -148.0
+offset_right = 27.5
+offset_bottom = -112.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Back"
+
+[node name="Level1Button" type="Button" parent="LevelSelect" unique_id=1463165896]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -276.0
+offset_top = -348.0
+offset_right = -183.0
+offset_bottom = -256.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "LEVEL
+1"
+
+[node name="Level2Button" type="Button" parent="LevelSelect" unique_id=1069588898]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.5
+offset_top = -348.0
+offset_right = 46.5
+offset_bottom = -256.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "LEVEL
+2
+"
+
+[node name="Level3Button" type="Button" parent="LevelSelect" unique_id=1987427699]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 183.0
+offset_top = -348.0
+offset_right = 276.0
+offset_bottom = -256.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "LEVEL
+3"
+
+[connection signal="pressed" from="Menu/SelectLevelButton" to="." method="_on_select_level_button_pressed"]
+[connection signal="pressed" from="Menu/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="LevelSelect/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="LevelSelect/Level1Button" to="." method="_on_level_1_button_pressed"]
