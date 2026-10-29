@@ -2,9 +2,10 @@ extends CharacterBody2D
 class_name PlayerController
 
 const SPEED = 150.0
-const JUMP_VELOCITY = -150.0
-const GRAVITY = 320.0
+const JUMP_VELOCITY = -210.0
+const GRAVITY = 400.0
 const ACCELERATION = 900.0
+const JUMP_HEIGHT_THRESHOLD = -80.0
 
 # These must be oneshot timers
 @export var coyote_timer : Timer
@@ -38,6 +39,12 @@ func _store_jump():
 	jump_buffer = true
 	jump_buffer_timer.start()
 	
+
+# Purpose: Introduce variable jump height
+func _cut_jump():
+	if velocity.y<JUMP_HEIGHT_THRESHOLD:
+		velocity.y = JUMP_HEIGHT_THRESHOLD
+	
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -58,6 +65,10 @@ func _physics_process(delta: float) -> void:
 			_jump()
 		else:
 			_store_jump()
+	
+	# Handle variable jump height
+	if Input.is_action_just_released("jump"):
+		_cut_jump()
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
