@@ -2,11 +2,11 @@ extends CharacterBody2D
 class_name PlayerController
 
 const SPEED = 150.0
-const JUMP_VELOCITY = -210.0
+const JUMP_VELOCITY = -230.0
 const JUMP_GRAVITY = 400.0
 const FALL_GRAVITY = 510.0
 const ACCELERATION = 900.0
-const JUMP_HEIGHT_THRESHOLD = -70.0
+const JUMP_HEIGHT_THRESHOLD = -85.0
 
 # These must be oneshot timers
 @export var coyote_timer : Timer
