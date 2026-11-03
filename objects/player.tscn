@@ -7,11 +7,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gte3l"]
 size = Vector2(40, 40)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=221005747 node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "health")]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=221005747 node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "health", "camera")]
 script = ExtResource("1_ykyjo")
 coyote_timer = NodePath("CoyoteTime")
 jump_buffer_timer = NodePath("JumpBuffer")
 health = NodePath("HealthComponent")
+camera = NodePath("Camera2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=111814278]
 scale = Vector2(0.3, 0.3)
