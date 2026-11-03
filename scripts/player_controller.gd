@@ -11,6 +11,8 @@ const JUMP_HEIGHT_THRESHOLD = -85.0
 # These must be oneshot timers
 @export var coyote_timer : Timer
 @export var jump_buffer_timer : Timer
+@export var health : HealthComponent
+@export var camera : Camera2D
 
 # variables to handle coyote time and jump buffering
 var coyote_time_used := false
@@ -20,6 +22,7 @@ var jump_buffer := false
 func _ready() -> void:
 	assert(coyote_timer, "Coyote timer is required!")
 	assert(jump_buffer_timer, "Jump buffer is required!")
+	assert(health, "Health component is required!")
 
 
 # Purpose: Handle Coyote time
@@ -94,3 +97,18 @@ func _on_coyote_timer_timeout() -> void:
 	
 func _on_jump_buffer_timer_timeout() -> void:
 	jump_buffer = false
+
+
+func _on_health_damage_taken(damage: int) -> void:
+	pass # Replace with function body, after adding art and sound
+
+
+func _on_health_healed(amount: int) -> void:
+	pass # Replace with function body, after adding art and sound
+
+
+func _on_health_died() -> void:
+	# Preserve the camera from annhilation, assuming we have it
+	if camera:
+		camera.reparent(get_parent())
+	queue_free()

@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://ddhswvkxdsks5" path="res://scripts/player_controller.gd" id="1_ykyjo"]
 [ext_resource type="Texture2D" uid="uid://cvupagfhcp4" path="res://icon.svg" id="2_uxov2"]
+[ext_resource type="Script" uid="uid://ckwjrdlh6w0hl" path="res://scripts/health_component.gd" id="3_uxov2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gte3l"]
 size = Vector2(40, 40)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=221005747 node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer")]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=221005747 node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "health")]
 script = ExtResource("1_ykyjo")
 coyote_timer = NodePath("CoyoteTime")
 jump_buffer_timer = NodePath("JumpBuffer")
+health = NodePath("HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=111814278]
 scale = Vector2(0.3, 0.3)
@@ -31,5 +33,12 @@ one_shot = true
 wait_time = 0.15
 one_shot = true
 
+[node name="HealthComponent" type="Node" parent="." unique_id=2082453302]
+script = ExtResource("3_uxov2")
+metadata/_custom_type_script = "uid://ckwjrdlh6w0hl"
+
 [connection signal="timeout" from="CoyoteTime" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="JumpBuffer" to="." method="_on_jump_buffer_timer_timeout"]
+[connection signal="damage_taken" from="HealthComponent" to="." method="_on_health_damage_taken"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_died"]
+[connection signal="healed" from="HealthComponent" to="." method="_on_health_healed"]

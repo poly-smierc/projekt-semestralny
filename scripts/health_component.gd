@@ -10,6 +10,8 @@ signal damage_taken(damage: int)
 signal healed(amount: int)
 signal died
 
+var dead := false
+
 # Don't allow overheal
 func _ready() -> void:
 	if current_health>max_health:
@@ -21,7 +23,7 @@ func take_damage(amount: int) -> void:
 	if amount<0:
 		push_warning("Negative value for damage found! Use heal() to increase health")
 		return
-	if invulnerable or amount==0:
+	if invulnerable or amount==0 or dead:
 		return
 		
 	current_health-=amount
@@ -29,6 +31,7 @@ func take_damage(amount: int) -> void:
 	
 	if current_health<=0:
 		died.emit()
+		dead = true
 
 
 # Purpose: Heal
@@ -36,7 +39,9 @@ func heal(amount: int) -> void:
 	if amount<0:
 		push_warning("Negative value for heal found! Use take_damage instead.")
 		return
-	
+	if dead:
+		return
+		
 	current_health+=amount
 	if current_health>max_health:
 		healed.emit(current_health-max_health)
