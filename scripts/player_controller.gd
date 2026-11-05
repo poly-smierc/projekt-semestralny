@@ -7,6 +7,10 @@ const JUMP_GRAVITY = 400.0
 const FALL_GRAVITY = 510.0
 const ACCELERATION = 900.0
 const JUMP_HEIGHT_THRESHOLD = -85.0
+const VEL_CAMERA_SMOOTHING_THRESHOLD = 300.0
+const BASE_SMOOTHING = 5.0
+const SMOOTHING_MULTIPLIER = 0.05
+const MAX_SMOOTH = 50.0
 
 # These must be oneshot timers
 @export var coyote_timer : Timer
@@ -39,16 +43,27 @@ func _jump() -> void:
 		jump_buffer_timer.stop()
 	
 	
-func _store_jump():
+func _store_jump() -> void:
 	jump_buffer = true
 	jump_buffer_timer.start()
 	
 
 # Purpose: Introduce variable jump height
-func _cut_jump():
+func _cut_jump() -> void:
 	if velocity.y<JUMP_HEIGHT_THRESHOLD:
 		velocity.y = JUMP_HEIGHT_THRESHOLD
 	
+	
+func _lerp_camera_smoothing() -> void:
+	if not camera:
+		return
+	
+	var speed := velocity.length()
+	if speed>VEL_CAMERA_SMOOTHING_THRESHOLD:
+		var new_smooth = SMOOTHING_MULTIPLIER*(speed-VEL_CAMERA_SMOOTHING_THRESHOLD)+BASE_SMOOTHING
+		camera.position_smoothing_speed = min(new_smooth, MAX_SMOOTH)
+	else:
+		camera.position_smoothing_speed = BASE_SMOOTHING
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -86,7 +101,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction*SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, ACCELERATION*delta)
-
+		
+	_lerp_camera_smoothing()
 	move_and_slide()
 
 
