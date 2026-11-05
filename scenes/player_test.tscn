@@ -31,4 +31,4 @@ scale = Vector2(3.9062498, 0.34374997)
 texture = ExtResource("1_fdpfy")
 
 [node name="CharacterBody2D" parent="." unique_id=221005747 instance=ExtResource("2_fdpfy")]
-position = Vector2(0, -51)
+position = Vector2(0, -1583)

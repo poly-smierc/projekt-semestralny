@@ -11,6 +11,7 @@ const VEL_CAMERA_SMOOTHING_THRESHOLD = 300.0
 const BASE_SMOOTHING = 5.0
 const SMOOTHING_MULTIPLIER = 0.05
 const MAX_SMOOTH = 50.0
+const IMPACT_DURATION = 0.05
 
 # These must be oneshot timers
 @export var coyote_timer : Timer
@@ -53,17 +54,34 @@ func _cut_jump() -> void:
 	if velocity.y<JUMP_HEIGHT_THRESHOLD:
 		velocity.y = JUMP_HEIGHT_THRESHOLD
 	
-	
+
+# Purpose: Make sure that with higher velocities, player is still on camera
 func _lerp_camera_smoothing() -> void:
 	if not camera:
 		return
 	
 	var speed := velocity.length()
 	if speed>VEL_CAMERA_SMOOTHING_THRESHOLD:
+		# a linear function to modify smoothing speed
 		var new_smooth = SMOOTHING_MULTIPLIER*(speed-VEL_CAMERA_SMOOTHING_THRESHOLD)+BASE_SMOOTHING
 		camera.position_smoothing_speed = min(new_smooth, MAX_SMOOTH)
 	else:
 		camera.position_smoothing_speed = BASE_SMOOTHING
+		
+		
+# Purpose: Add some oomph when landing from a fall
+func _camera_floor_impact():
+	if not camera:
+		return
+	
+	if camera.position_smoothing_speed != BASE_SMOOTHING:
+		var tween := create_tween()
+		var smoothing_speed_vector := Vector2(0, camera.position_smoothing_speed*2)
+		var new_camera_pos = camera.position+smoothing_speed_vector
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(camera, "position", new_camera_pos, IMPACT_DURATION)
+		tween.tween_property(camera, "position", camera.position, IMPACT_DURATION)
+		tween.play()
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -80,6 +98,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		coyote_time_used = false
 		velocity.y = 0.0
+		_camera_floor_impact()
 		
 		if jump_buffer:
 			_jump()
