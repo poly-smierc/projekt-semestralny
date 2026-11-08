@@ -25,6 +25,7 @@ shape = SubResource("RectangleShape2D_gte3l")
 position = Vector2(0, -60)
 zoom = Vector2(1.6, 1.6)
 position_smoothing_enabled = true
+drag_vertical_enabled = true
 
 [node name="CoyoteTime" type="Timer" parent="." unique_id=838438946]
 wait_time = 0.12

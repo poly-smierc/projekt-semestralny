@@ -19,6 +19,28 @@ position = Vector2(-9.596348e-06, 0.9999981)
 scale = Vector2(3.9062498, 0.34374997)
 texture = ExtResource("1_fdpfy")
 
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1716885686]
+position = Vector2(731, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=1715203046]
+shape = SubResource("RectangleShape2D_75q7c")
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D3" unique_id=120752880]
+position = Vector2(-9.596348e-06, 0.9999981)
+scale = Vector2(3.9062498, 0.34374997)
+texture = ExtResource("1_fdpfy")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=1190313217]
+position = Vector2(859, -47)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=345995246]
+shape = SubResource("RectangleShape2D_75q7c")
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D4" unique_id=950258533]
+position = Vector2(-9.596348e-06, 0.9999981)
+scale = Vector2(3.9062498, 0.34374997)
+texture = ExtResource("1_fdpfy")
+
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=561903808]
 position = Vector2(582, 51)
 

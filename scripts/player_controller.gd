@@ -7,11 +7,12 @@ const JUMP_GRAVITY = 400.0
 const FALL_GRAVITY = 510.0
 const ACCELERATION = 900.0
 const JUMP_HEIGHT_THRESHOLD = -85.0
-const VEL_CAMERA_SMOOTHING_THRESHOLD = 300.0
+const VEL_CAMERA_SMOOTHING_THRESHOLD = 400.0
 const BASE_SMOOTHING = 5.0
 const SMOOTHING_MULTIPLIER = 0.05
 const MAX_SMOOTH = 50.0
-const IMPACT_DURATION = 0.05
+const IMPACT_DURATION = 0.15
+const SMOOTH_DIVIDER = 3
 
 # These must be oneshot timers
 @export var coyote_timer : Timer
@@ -76,11 +77,11 @@ func _camera_floor_impact():
 	
 	if camera.position_smoothing_speed != BASE_SMOOTHING:
 		var tween := create_tween()
-		var smoothing_speed_vector := Vector2(0, camera.position_smoothing_speed*2)
-		var new_camera_pos = camera.position+smoothing_speed_vector
-		tween.set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(camera, "position", new_camera_pos, IMPACT_DURATION)
-		tween.tween_property(camera, "position", camera.position, IMPACT_DURATION)
+		var speed_vector := Vector2(0, camera.position_smoothing_speed/SMOOTH_DIVIDER)
+		tween.set_trans(Tween.TRANS_CIRC)
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_property(camera, "offset", speed_vector, IMPACT_DURATION)
+		tween.tween_property(camera, "offset", Vector2.ZERO, IMPACT_DURATION)
 		tween.play()
 	
 func _physics_process(delta: float) -> void:
