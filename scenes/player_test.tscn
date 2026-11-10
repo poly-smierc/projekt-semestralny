@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cvupagfhcp4" path="res://icon.svg" id="1_fdpfy"]
 [ext_resource type="PackedScene" uid="uid://d1q6voajue5ry" path="res://objects/player.tscn" id="2_fdpfy"]
+[ext_resource type="Script" uid="uid://oh87q53b20l8" path="res://scenes/bounds.gd" id="3_6p80c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75q7c"]
 size = Vector2(500, 40)
@@ -54,3 +55,8 @@ texture = ExtResource("1_fdpfy")
 
 [node name="CharacterBody2D" parent="." unique_id=221005747 instance=ExtResource("2_fdpfy")]
 position = Vector2(0, -1583)
+
+[node name="Bounds" type="Node2D" parent="." unique_id=128020156 node_paths=PackedStringArray("player")]
+script = ExtResource("3_6p80c")
+bounds_rect = Rect2(-300, -1900, 1450, 2000)
+player = NodePath("../CharacterBody2D")
