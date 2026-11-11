@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dab6jnkyy85j3"]
+
+[ext_resource type="Texture2D" uid="uid://cvupagfhcp4" path="res://icon.svg" id="1_3cr4k"]
+[ext_resource type="Script" uid="uid://1hvh6f2h6tf2" path="res://scripts/item_test.gd" id="1_4kqj1"]
+[ext_resource type="PackedScene" uid="uid://d1q6voajue5ry" path="res://objects/player.tscn" id="2_3hlib"]
+[ext_resource type="PackedScene" uid="uid://dren837x70obv" path="res://objects/item.tscn" id="2_4kqj1"]
+[ext_resource type="Script" uid="uid://oh87q53b20l8" path="res://scripts/bounds.gd" id="3_mwajv"]
+[ext_resource type="PackedScene" uid="uid://c7cibe708gsaw" path="res://objects/house.tscn" id="6_3jfeh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7ayq"]
+size = Vector2(400, 20)
+
+[node name="Test2" type="Node2D" unique_id=636944564]
+script = ExtResource("1_4kqj1")
+
+[node name="Item" parent="." unique_id=2138255242 instance=ExtResource("2_4kqj1")]
+position = Vector2(140, -43)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1469576859]
+position = Vector2(447, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=860786816]
+shape = SubResource("RectangleShape2D_j7ayq")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2" unique_id=461231437]
+position = Vector2(-6.914139e-06, -4.7683716e-07)
+scale = Vector2(3.1249998, 0.15625)
+texture = ExtResource("1_3cr4k")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1842884054]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=504203261]
+shape = SubResource("RectangleShape2D_j7ayq")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1401850589]
+position = Vector2(-6.914139e-06, -4.7683716e-07)
+scale = Vector2(3.1249998, 0.15625)
+texture = ExtResource("1_3cr4k")
+
+[node name="CharacterBody2D" parent="." unique_id=221005747 instance=ExtResource("2_3hlib")]
+position = Vector2(-30, -90)
+
+[node name="Bounds" type="Node2D" parent="." unique_id=1059235017 node_paths=PackedStringArray("player")]
+position = Vector2(-294, 52)
+script = ExtResource("3_mwajv")
+bounds_rect = Rect2(-200, -400, 2000, 500)
+player = NodePath("../CharacterBody2D")
+metadata/_custom_type_script = "uid://oh87q53b20l8"
+
+[node name="House" parent="." unique_id=293326323 instance=ExtResource("6_3jfeh")]
+position = Vector2(-131, -46)

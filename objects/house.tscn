@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c7cibe708gsaw"]
+
+[ext_resource type="Script" uid="uid://dnea7o174im15" path="res://scripts/house.gd" id="1_qtlar"]
+[ext_resource type="Texture2D" uid="uid://cvupagfhcp4" path="res://icon.svg" id="2_rk7hg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bt5ap"]
+size = Vector2(78, 70)
+
+[node name="House" type="Area2D" unique_id=293326323]
+script = ExtResource("1_qtlar")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1862710115]
+shape = SubResource("RectangleShape2D_bt5ap")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=671805337]
+z_index = -10
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_rk7hg")
+
+[node name="DebugLabel" type="Label" parent="." unique_id=1489177718]
+offset_left = -64.0
+offset_top = -90.0
+offset_right = 79.0
+offset_bottom = -67.0
+theme_override_font_sizes/font_size = 12
+text = "Press K to damage"
+
+[node name="Label" type="Label" parent="." unique_id=90929759]
+offset_left = -59.0
+offset_top = -68.0
+offset_right = -19.0
+offset_bottom = -45.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
