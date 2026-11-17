@@ -136,7 +136,7 @@ func _on_jump_buffer_timer_timeout() -> void:
 
 
 func _on_health_damage_taken(damage: int) -> void:
-	pass # Replace with function body, after adding art and sound
+	print("Damage taken! ", damage)
 
 
 func _on_health_healed(amount: int) -> void:

@@ -1,8 +1,11 @@
 extends Node
 class_name HealthComponent
 
+## Max health of the component
 @export var max_health := 100
+## Current health of the component
 @export var current_health := 100
+## Is invulnerable to damage
 @export var invulnerable := false
 
 # Allow handling getting hit, healed and dying uniquely for each node
@@ -14,6 +17,7 @@ var dead := false
 
 # Don't allow overheal
 func _ready() -> void:
+	add_to_group("health")
 	if current_health>max_health:
 		current_health = max_health
 
@@ -49,4 +53,11 @@ func heal(amount: int) -> void:
 	else:
 		healed.emit(amount)
 	
+
+# Purpose: Set max health
+func set_new_max_health(new_max_health: int) -> void:
+	# Godot sucks at division...
+	var health_percentage := float(current_health)/float(max_health)
+	max_health = new_max_health
+	current_health = ceili(new_max_health*health_percentage)
 	

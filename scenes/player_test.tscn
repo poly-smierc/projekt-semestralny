@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cvupagfhcp4" path="res://icon.svg" id="1_fdpfy"]
 [ext_resource type="PackedScene" uid="uid://d1q6voajue5ry" path="res://objects/player.tscn" id="2_fdpfy"]
 [ext_resource type="Script" uid="uid://oh87q53b20l8" path="res://scripts/bounds.gd" id="3_6p80c"]
+[ext_resource type="Script" uid="uid://b4ml6h3vqg6qe" path="res://scripts/rain.gd" id="4_8ut53"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75q7c"]
 size = Vector2(500, 40)
@@ -60,3 +61,10 @@ position = Vector2(0, -1583)
 script = ExtResource("3_6p80c")
 bounds_rect = Rect2(-300, -1900, 1450, 2000)
 player = NodePath("../CharacterBody2D")
+
+[node name="Rain" type="Timer" parent="." unique_id=170687627]
+autostart = true
+script = ExtResource("4_8ut53")
+damage = 20
+start_with_rain = true
+metadata/_custom_type_script = "uid://b4ml6h3vqg6qe"
