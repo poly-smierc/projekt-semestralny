@@ -16,7 +16,7 @@ const DEFAULT_WAIT_TIME = 1.0
 ## Increase in rain time by every difficulty level
 @export_range(1.0, 2.0, 0.01) var rain_time_increase := 1.0
 ## Decrease in calm time by every difficulty level
-@export_range(0.0, 1.0, 0.01) var calm_time_decrease := 0.0
+@export_range(0.0, 1.0, 0.01) var calm_time_decrease := 1.0
 ## Debug option to start with rainy state (should be set to false)
 @export var start_with_rain := false
 
@@ -56,9 +56,10 @@ func _timer_tick() -> void:
 		_handle_state_switch()
 		state_updated.emit(current_state)
 
+
 # Purpose: Logic for calm state
 func _calm_state() -> void:
-	pass
+	print("calm tick")
 	
 
 # Purpose: Logic for rainy state
@@ -72,5 +73,8 @@ func _rainy_state() -> void:
 func _handle_state_switch() -> void:
 	if current_state==RainState.CALM:
 		current_state = RainState.RAINY
+		difficulty+=1
+		time_to_state_switch = rain_time*(rain_time_increase**difficulty)
 	elif current_state==RainState.RAINY:
 		current_state = RainState.CALM
+		time_to_state_switch = calm_time*(calm_time_decrease**difficulty)

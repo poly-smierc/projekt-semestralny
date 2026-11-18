@@ -65,6 +65,9 @@ player = NodePath("../CharacterBody2D")
 [node name="Rain" type="Timer" parent="." unique_id=170687627]
 autostart = true
 script = ExtResource("4_8ut53")
-damage = 20
+rain_time = 10
+calm_time = 10
+rain_time_increase = 1.2
+calm_time_decrease = 0.9
 start_with_rain = true
 metadata/_custom_type_script = "uid://b4ml6h3vqg6qe"
