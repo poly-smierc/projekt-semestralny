@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d1q6voajue5ry" path="res://objects/player.tscn" id="2_fdpfy"]
 [ext_resource type="Script" uid="uid://oh87q53b20l8" path="res://scripts/bounds.gd" id="3_6p80c"]
 [ext_resource type="Script" uid="uid://b4ml6h3vqg6qe" path="res://scripts/rain.gd" id="4_8ut53"]
+[ext_resource type="PackedScene" uid="uid://clpk0ulyy63a8" path="res://objects/rain_particles.tscn" id="5_2ue4q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75q7c"]
 size = Vector2(500, 40)
@@ -71,3 +72,6 @@ rain_time_increase = 1.2
 calm_time_decrease = 0.9
 start_with_rain = true
 metadata/_custom_type_script = "uid://b4ml6h3vqg6qe"
+
+[node name="GPUParticles2D" parent="." unique_id=1882154822 instance=ExtResource("5_2ue4q")]
+position = Vector2(432, -136)

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://clpk0ulyy63a8"]
+
+[sub_resource type="Curve" id="Curve_viqhy"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rgyju"]
+curve = SubResource("Curve_viqhy")
+
+[sub_resource type="Curve" id="Curve_8ut53"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_2ue4q"]
+_limits = [0.0, 30.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.48913038, 30), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_4fwf8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_gte3l"]
+curve_x = SubResource("Curve_8ut53")
+curve_y = SubResource("Curve_2ue4q")
+curve_z = SubResource("Curve_4fwf8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_75q7c"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -500, 0)
+emission_shape = 3
+emission_box_extents = Vector3(900, 1, 1)
+angle_min = -1.9999893
+angle_max = 2.0000107
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 1000, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveXYZTexture_gte3l")
+alpha_curve = SubResource("CurveTexture_rgyju")
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1882154822]
+amount = 750
+lifetime = 2.0
+visibility_rect = Rect2(-900, -500, 1800, 800)
+process_material = SubResource("ParticleProcessMaterial_75q7c")
