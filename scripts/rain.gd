@@ -29,6 +29,8 @@ var time_to_state_switch : float
 var current_state : RainState
 
 signal tick_updated(time: int)
+signal calm_tick
+signal rain_tick
 signal state_updated(new_state: RainState)
 
 func _ready() -> void:
@@ -59,14 +61,15 @@ func _timer_tick() -> void:
 
 # Purpose: Logic for calm state
 func _calm_state() -> void:
-	print("calm tick")
+	calm_tick.emit()
 	
 
 # Purpose: Logic for rainy state
 func _rainy_state() -> void:
+	rain_tick.emit()
 	var health_components := get_tree().get_nodes_in_group("health")
 	for component : HealthComponent in health_components:
-		component.take_damage(damage*(damage_increase**difficulty))
+		component.take_damage(floori(damage*(damage_increase**difficulty)))
 		
 
 # Purpose: Handle state switches
